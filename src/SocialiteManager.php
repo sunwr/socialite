@@ -13,6 +13,7 @@ use Laravel\Socialite\One\TwitterProvider;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Two\LinkedInProvider;
 use Laravel\Socialite\Two\BitbucketProvider;
+use Laravel\Socialite\Two\WechatProvider;
 use League\OAuth1\Client\Server\Twitter as TwitterServer;
 
 class SocialiteManager extends Manager implements Contracts\Factory
@@ -98,6 +99,20 @@ class SocialiteManager extends Manager implements Contracts\Factory
         );
     }
 
+    /**
+     * Create an instance of the specified driver.
+     *
+     * @return \Laravel\Socialite\Two\AbstractProvider
+     */
+    protected function createWechatDriver()
+    {
+        $config = $this->app['config']['services.wechat'];
+
+        return $this->buildProvider(
+          WechatProvider::class, $config
+        );
+    }
+    
     /**
      * Create an instance of the specified driver.
      *
